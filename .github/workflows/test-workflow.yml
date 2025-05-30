@@ -16,10 +16,13 @@ jobs:
     container:
       image: demisto/powershell:7.4.6.117357
     steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
       - name: Check
         run: |
           echo "Check!"
           cat /etc/os-release
+          ls -l
       - name: Install bash
         run: |
           sh
@@ -38,6 +41,6 @@ jobs:
           exit
           Install-Module Pester -Force
           Import-Module Pester -PassThru
-
-          Write-Output '>>> All dependencies installed'
+      - name: Copy files
+        run: |
 
