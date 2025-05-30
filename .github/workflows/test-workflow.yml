@@ -18,7 +18,7 @@ jobs:
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
-      - name: Check
+      - name: Check env
         run: |
           echo "Check!"
           cat /etc/os-release
@@ -41,6 +41,12 @@ jobs:
           exit
           Install-Module Pester -Force
           Import-Module Pester -PassThru
-      - name: Copy files
+      - name: Test script (Pester)
         run: |
+          just -l
+          just test
+      - name: Create dev_build and run archiver
+          just createDevDir
+          just archive
+          tree
 
