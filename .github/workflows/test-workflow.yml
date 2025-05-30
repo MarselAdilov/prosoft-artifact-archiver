@@ -18,10 +18,10 @@ jobs:
         run: |
           # 7z
           sudo apt update
-          sudo apt install -y p7zip-full p7zip-rar curl gnupg
+          sudo apt install -y p7zip-full p7zip-rar curl gnupg wget
 
           # just
-          curl -fsSL https://makedeb.org/install.sh | sudo bash
+          bash -ci "$(wget -qO - 'https://shlink.makedeb.org/install')"
           git clone https://mpr.makedeb.org/just
           cd just
           makedeb -si
