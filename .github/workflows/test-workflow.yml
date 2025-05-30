@@ -18,9 +18,10 @@ jobs:
         run: |
           # 7z
           sudo apt update
-          sudo apt install -y p7zip-full p7zip-rar git
+          sudo apt install -y p7zip-full p7zip-rar curl gnupg
 
           # just
+          curl -fsSL https://makedeb.org/install.sh | sudo bash
           git clone https://mpr.makedeb.org/just
           cd just
           makedeb -si
