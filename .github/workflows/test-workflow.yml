@@ -14,6 +14,10 @@ jobs:
   test-script:
     runs-on: ubuntu-latest
     steps:
+      - name: tput demo
+        run: |
+          echo $TERM
+          TERM=xterm tput setaf 2 && echo "This is green text"
       - name: Install dependencies
         run: |
           # 7z
