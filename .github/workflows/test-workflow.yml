@@ -11,7 +11,6 @@ on:
 
 jobs:  
   build-Docker:
-    # needs: test-script
     runs-on: ubuntu-latest
     container:
       image: demisto/powershell:7.4.6.117357
@@ -28,15 +27,11 @@ jobs:
           sh
           apk update
           apk add bash
-      - name: Install dependencies
+      - name: Install 7zip && just
+        shell: bash
         run: |
-          # 7zip
-          apk update
-          apk add 7zip
-
-          # just
-          apk add just
-      - name: Check Pester installation
+          apk add 7zip just
+      - name: Install Pester
         shell: pwsh
         run: |
           Install-Module Pester -Force
