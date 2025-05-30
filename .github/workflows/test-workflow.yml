@@ -36,14 +36,11 @@ jobs:
 
           # just
           apk add just
-
-          # Pester
-          exit
-          Install-Module Pester -Force
-          Import-Module Pester -PassThru
       - name: Check Pester installation
         shell: pwsh
-        run: Import-Module Pester -PassThru
+        run: |
+          Install-Module Pester -Force
+          Import-Module Pester -PassThru
       - name: Test script (Pester)
         run: |
           just -l
