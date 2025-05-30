@@ -21,7 +21,8 @@ jobs:
           sudo apt install -y p7zip-full p7zip-rar curl gnupg wget bash
 
           # just
-          bash -ci "$(wget -qO - 'https://shlink.makedeb.org/install')"
+          wget -qO - https://shlink.makedeb.org/install | sudo bash
+          ls -l
           git clone https://mpr.makedeb.org/just
           cd just
           makedeb -si
