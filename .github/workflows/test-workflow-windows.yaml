@@ -20,24 +20,31 @@ jobs:
           echo "Check!"
           ls 
       - name: Install Chocolatey
-        if: always()
         run: |
           Set-ExecutionPolicy Bypass -Scope Process -Force;
           [System.Net.ServicePointManager]::SecurityProtocol = [System.Net.ServicePointManager]::SecurityProtocol -bor 3072;
           iex ((New-Object System.Net.WebClient).DownloadString('https://community.chocolatey.org/install.ps1'))
       - name: Install 7zip
-        if: always()
         run: |
           choco install 7zip -y
       - name: Install just
-        if: always()
         run: |
           choco install just -y
       - name: Install Pester
-        if: always()
         run: |
           Install-Module Pester -Force
           Import-Module Pester -PassThru
+      - name: Test script (Pester)
+        run: |
+          just -l
+          just test
+          tree /F
+      - name: Create dev_build and run archiver
+        run: |
+          just createDevDir
+          just archive
+          tree /F
+
       
 
 
