@@ -1,0 +1,40 @@
+name: Build Docker and test
+
+on:
+  push:
+    branches:
+      - main
+    paths-ignore:
+      - 'README.md'
+  workflow_dispatch:
+
+
+jobs:  
+  build-Docker:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+      - name: Check env
+        run: |
+          echo "Check!"
+          cat /etc/os-release
+          ls -l
+      - name: Build Docker image
+        run: |
+          docker build -t alpine_pwsh:latest .
+
+      - name: Run container from image
+        run: |
+          docker run -it alpine_pwsh:latest
+      - name: Run tests
+        run: |
+          ls -l
+          just -l
+          just test
+      - name: Create dev_build and run archiver
+        run: |
+          just createDevDir
+          just archive
+          tree
+
