@@ -24,17 +24,17 @@ jobs:
         run: |
           docker build -t alpine_pwsh:latest .
 
-      - name: Run container from image
+      - name: Run container
         run: |
-          docker run --rm alpine_pwsh:latest
+          docker run -d --name alpine_pwsh alpine_pwsh:latest
       - name: Run tests
         run: |
-          ls -l
-          just -l
-          just test
+          docker exec alpine_pwsh pwsh -Command 'ls -l'
+          docker exec alpine_pwsh pwsh -Command 'just -l'
+          docker exec alpine_pwsh pwsh -Command 'just test'
       - name: Create dev_build and run archiver
         run: |
-          just createDevDir
-          just archive
-          tree
+          docker exec alpine_pwsh pwsh -Command 'just createDevDir'
+          docker exec alpine_pwsh pwsh -Command 'just archive'
+          docker exec alpine_pwsh pwsh -Command 'tree'
 
