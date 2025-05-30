@@ -50,7 +50,7 @@ jobs:
           Import-Module Pester -PassThru
   
   build-Docker:
-    needs: test-script
+    # needs: test-script
     runs-on: ubuntu-latest
     container:
       image: alpine:latest
@@ -58,3 +58,4 @@ jobs:
       - name: Check
         run: |
           echo "Check!"
+          cat /etc/os-release
