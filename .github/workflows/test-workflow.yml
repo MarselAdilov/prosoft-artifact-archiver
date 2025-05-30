@@ -1,0 +1,51 @@
+name: Test workflow
+
+on:
+  push:
+    branches:
+      - main
+    paths-ignore:
+      - 'README.md'
+  workflow_dispatch:
+
+
+jobs:
+  
+  test-script:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Install dependencies
+        run: |
+          # 7z
+          apt update
+          apt install -y p7zip-full p7zip-rar
+
+          # just
+          git clone https://mpr.makedeb.org/just
+          cd just
+          makedeb -si
+          cd ..
+
+          # PowerShell
+          apt-get install -y wget apt-transport-https software-properties-common   
+          source /etc/os-release
+          wget -q https://packages.microsoft.com/config/ubuntu/$VERSION_ID/packages-microsoft-prod.deb
+          sudo dpkg -i packages-microsoft-prod.deb
+          rm packages-microsoft-prod.deb
+          sudo apt-get update
+          sudo apt-get install -y powershell
+          pwsh 
+
+          # Pester
+          Install-Module Pester -Force
+          Import-Module Pester -PassThru
+  
+  build-Docker:
+    needs: test-script
+    runs-on: ubuntu-latest
+    container:
+      image: alpine:latest
+    steps:
+      - name: Check
+        run: |
+          echo "Check!"
