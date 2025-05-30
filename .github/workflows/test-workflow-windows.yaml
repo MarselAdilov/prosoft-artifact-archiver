@@ -1,0 +1,23 @@
+name: Test on Windows
+
+on:
+  push:
+    branches:
+      - main
+    paths-ignore:
+      - 'README.md'
+  workflow_dispatch:
+
+
+jobs:  
+  build-Docker:
+    runs-on: windows-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+      - name: Check env
+        run: |
+          echo "Check!"
+          ls 
+
+
