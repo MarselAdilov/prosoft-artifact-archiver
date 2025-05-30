@@ -41,6 +41,9 @@ jobs:
           exit
           Install-Module Pester -Force
           Import-Module Pester -PassThru
+      - name: Check Pester installation
+        shell: pwsh
+        run: Import-Module Pester -PassThru
       - name: Test script (Pester)
         run: |
           just -l
