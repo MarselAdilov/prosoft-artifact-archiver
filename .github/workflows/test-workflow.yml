@@ -18,7 +18,7 @@ jobs:
         run: |
           # 7z
           sudo apt update
-          sudo apt install -y p7zip-full p7zip-rar
+          sudo apt install -y p7zip-full p7zip-rar git
 
           # just
           git clone https://mpr.makedeb.org/just
