@@ -10,7 +10,7 @@ on:
 
 
 jobs:  
-  build-Docker:
+  run-tests:
     runs-on: ubuntu-latest
     container:
       image: demisto/powershell:7.4.6.117357
