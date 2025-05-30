@@ -19,9 +19,11 @@ jobs:
           # 7z
           sudo apt update
           sudo apt install -y p7zip-full p7zip-rar curl gnupg wget bash
+          echo '>>> 7z installed'
 
           # just
           wget -qO - https://shlink.makedeb.org/install | sudo bash
+          echo '>>> makedeb installed'
           ls -l
           git clone https://mpr.makedeb.org/just
           cd just
