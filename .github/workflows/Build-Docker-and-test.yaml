@@ -26,7 +26,7 @@ jobs:
 
       - name: Run container
         run: |
-          docker run --rm --memory=2g --name alpine_pwsh alpine_pwsh:latest
+          docker run -d --memory=2g --name alpine_pwsh alpine_pwsh:latest
           docker stats alpine_pwsh
       - name: Run tests
         run: |
