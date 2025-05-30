@@ -26,6 +26,7 @@ jobs:
           echo '>>> 7z installed'
 
           # just
+          TERM=xterm tput setaf 2 && echo "This is green text"
           wget -qO - https://shlink.makedeb.org/install | sudo bash
           echo '>>> makedeb installed'
           ls -l
