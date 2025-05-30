@@ -34,7 +34,7 @@ jobs:
           # docker exec alpine_pwsh pwsh -Command 'just -l'
           # docker exec alpine_pwsh pwsh -Command 'just test'
 
-          docker run --rm alpine_pwsh:latest pwsh -c "just -l"
+          
           docker run --rm alpine_pwsh:latest pwsh -c "just test"
 
       - name: Create dev_build and run archiver
