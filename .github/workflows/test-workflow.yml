@@ -9,53 +9,33 @@ on:
   workflow_dispatch:
 
 
-jobs:
-  
-  test-script:
-    runs-on: ubuntu-latest
-    steps:
-      - name: tput demo
-        run: |
-          echo $TERM
-          TERM=xterm tput setaf 2 && echo "This is green text"
-      - name: Install dependencies
-        run: |
-          # 7z
-          sudo apt update
-          sudo apt install -y p7zip-full p7zip-rar curl gnupg wget bash
-          echo '>>> 7z installed'
-
-          # just
-          TERM=xterm tput setaf 2 && echo "This is green text"
-          wget -qO - https://shlink.makedeb.org/install | sudo bash
-          echo '>>> makedeb installed'
-          ls -l
-          git clone https://mpr.makedeb.org/just
-          cd just
-          makedeb -si
-          cd ..
-
-          # PowerShell
-          sudo apt-get install -y wget apt-transport-https software-properties-common   
-          source /etc/os-release
-          wget -q https://packages.microsoft.com/config/ubuntu/$VERSION_ID/packages-microsoft-prod.deb
-          sudo dpkg -i packages-microsoft-prod.deb
-          rm packages-microsoft-prod.deb
-          sudo apt-get update
-          sudo apt-get install -y powershell
-          pwsh 
-
-          # Pester
-          Install-Module Pester -Force
-          Import-Module Pester -PassThru
-  
+jobs:  
   build-Docker:
     # needs: test-script
     runs-on: ubuntu-latest
     container:
-      image: alpine:latest
+      image: demisto/powershell:7.4.6.117357
     steps:
       - name: Check
         run: |
           echo "Check!"
           cat /etc/os-release
+      - name: Install bash
+        run: |
+          sh
+          apk update
+          apk add bash
+      - name: Install dependencies
+        run: |
+          # 7z
+          apk update
+          apk add 7z 
+
+          # just
+          apk add just
+
+          # Pester
+          exit
+          Install-Module Pester -Force
+          Import-Module Pester -PassThru
+
