@@ -46,6 +46,7 @@ jobs:
           just -l
           just test
       - name: Create dev_build and run archiver
+        run: |
           just createDevDir
           just archive
           tree
