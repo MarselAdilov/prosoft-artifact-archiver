@@ -9,7 +9,8 @@ function Get-Hash {
         [string]$TmpHashDir
     )
     
-    $outputFile = "${TmpHashDir}/${Algorithm.ToLower()}sums.txt"
+    $algorithmLower = $Algorithm.ToLower()
+    $outputFile = "${TmpHashDir}/${algorithmLower}sums.txt"
     Get-ChildItem -Path $ProjectPath -Recurse -File | ForEach-Object {
         $hash = Get-FileHash -Algorithm $Algorithm -Path $_.FullName 
         "$($hash.Hash)  $($hash.Path)"
