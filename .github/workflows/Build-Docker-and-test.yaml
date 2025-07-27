@@ -1,6 +1,8 @@
 name: Build Docker and test
 
 on:
+  pull_request:
+    branches: [main]
   push:
     branches:
       - main
